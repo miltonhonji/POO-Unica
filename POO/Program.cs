@@ -5,11 +5,31 @@ namespace POO
 {
     public class Program
     {
-
-
         static void Main(string[] args)
         {
-            Conta conta = new Conta
+            //Aqui iremos mencionar o titulo
+            Console.WriteLine("****Finanças do Milton****");
+            //Insira uma opção
+            Console.WriteLine();
+            //Selecionando classe e objetos
+            Console.WriteLine("0 - Classe e Objetos");
+
+            //Conforme visto na aula iremos declarar a variável para usar no swicth/case
+            var opcao = Console.ReadKey();
+
+            //Aqui iremos pegar a variavél opcao.keychar (Quando houver um determinado ele irá chamar determinado método.
+            switch (opcao.KeyChar)
+            {
+                case '0':
+                    //Chamando a classe "ClassesObjetos" e o método InformacoesContaBancariaCliente utilizando o 'new'
+                    new ClassesObjetos().InformacoesContaBancariaCliente();
+                    break;
+                default:
+                    break;
+            }
+
+            //Exemplo
+            /*Conta conta = new Conta
             {
                 Banco = "Banco XPTO",
                 NumeroConta = 8792,
@@ -36,7 +56,7 @@ namespace POO
             Console.WriteLine($"Banco {conta.Banco}" + "\n");
             Console.WriteLine($"Número da Conta {conta.NumeroConta}" + "\n");
             Console.WriteLine($"Saldo {conta.Saldo}" + "\n");
-            Console.ReadKey();
+            Console.ReadKey();*/
         }
     }
 }
