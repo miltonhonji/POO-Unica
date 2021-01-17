@@ -15,6 +15,8 @@ namespace POO
             Console.WriteLine("0 - Classe e Objetos");
             //Escolhendo a opção Cadastrar Opção Cadastrar Clientes
             Console.WriteLine("1 - Metodos Bancos");
+            //Escolhendo a opção Operações Bancárias
+            Console.WriteLine("2 - Operações bancárias");
 
             //Conforme visto na aula iremos declarar a variável para usar no swicth/case
             var opcao = Console.ReadKey();
@@ -28,8 +30,13 @@ namespace POO
                     break;
 
                 case '1':
-                    //Chamando o classe "MétodosBanco" e o método CadastrarCliente
+                    //Chamando o classe "MetodosBanco" e o método CadastrarCliente
                     new MetodosBancos().CadastrarCliente();
+                    break;
+
+                case '2':
+                    //Chamando a classe "MetodosBancos" e o método OperacoesBancarias
+                    new MetodosBancos().ExecutarOperacoesBancarias();
                     break;
             }
         }
