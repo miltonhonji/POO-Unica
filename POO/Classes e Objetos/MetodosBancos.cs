@@ -85,21 +85,46 @@ namespace POO.Classes_e_Objetos
                 NomeTitular = "Milton",
                 Agencia = 0822,
                 Conta = 107322,
-                Saldo = 1200
+                Saldo = 2000
             };
 
-            //Chama o método Depositar (com o valorConvertido
-            contaPoupanca.Depositar(valorConvertido);
+            //Insira o nome da pessoa que receberá a conta
+            Console.WriteLine("Insira o nome do cliente que receberá o depósito: ");
+            //var nomeDoClienteDestino
+            var nomeClienteDestino = Console.ReadLine();
+            //o valorRecebido
+            var valorDestino = Console.ReadLine();
+            //Conversão para Double
+            var valorDestinoConvertido = Convert.ToDouble(valorConvertido);
+
+            //uma outra contaDestino
+            var contaDestino = new ContaPoupanca()
+            {
+                //Acrescetando os valores desta classe
+                NomeTitular = "Jessica",
+                Agencia = 0711,
+                Conta = 107321,
+                Saldo = 5000
+            };
+
+            //Chama o método Depositar (com o valorConvertido)
+            //contaPoupanca.Depositar(valorConvertido);
 
             //Chama o método para Sacar
             //contaPoupanca.Sacar(valorConvertido);
 
-            //Quando é chamado o método Sacar
+            //Chamando o método Transferir, passando a contaDestino
+            contaPoupanca.Transferir(valorDestinoConvertido, contaDestino);
+
+            Console.WriteLine();
+            //Agora a Jessica receberá o valor
+            Console.WriteLine($"A {contaDestino.NomeTitular}, " + $"da agência: {contaDestino.Agencia}" + "-" + $"{ contaDestino.Conta }" + "\n" + 
+                $"está com novo saldo de: {contaDestino.Saldo}" + "reais");
 
             //Informações após feito o depósito
-            Console.WriteLine();
-            Console.WriteLine($"O {contaPoupanca.NomeTitular} " + $"da agencia: {contaPoupanca.Agencia}" + "-" + $"{contaPoupanca.Conta}" + "\n" +
-                $"fez um depósito e está com o saldo de: {Convert.ToDouble(contaPoupanca.Saldo)} " + "reais");
+            //Console.WriteLine();
+            //Console.WriteLine($"O {contaPoupanca.NomeTitular} " + $"da agencia: {contaPoupanca.Agencia}" + "-" + $"{contaPoupanca.Conta}" + "\n" +
+            //   $"fez um depósito e está com o saldo de: {Convert.ToDouble(contaPoupanca.Saldo)} " + "reais");
 
             //Achei necessário colocar antes ReadKey()
             Console.ReadKey();
@@ -128,7 +153,7 @@ namespace POO.Classes_e_Objetos
         public double Sacar(double valorSaque)
         {
             //Se valorSaque for maior que o Saldo aparecerá a mensagem que não dá para sacar.
-            if(valorSaque > Saldo)
+            if (valorSaque > Saldo)
             {
                 Console.WriteLine($"Não foi possível realizar o saque, pois o seu saldo é de: {Saldo}!");
             }
@@ -138,13 +163,39 @@ namespace POO.Classes_e_Objetos
                 Saldo -= valorSaque;
 
                 Console.WriteLine();
-    
+
                 Console.WriteLine($"O {NomeTitular} " + $"da agencia: {Agencia}" + "-" + $"{Conta}" + "\n" +
                     $"fez um saque e está com o saldo de: {Saldo} " + "reais");
             }
             //Retorna o saldo
             return Saldo;
         }
+
+        //Transferir
+        public double Transferir(double valorTransferencia, ContaPoupanca destino)
+        {
+            //Indicando quando um Saldo é menor que valor de transferencia
+            if(Saldo < valorTransferencia)
+            {
+                Console.WriteLine("Não foi possível depositar, valor abaixo do esperado.");
+            }
+            else
+            {
+                //Subtraindo o Saldo para passar no variável valorTransferencia
+                Saldo -= valorTransferencia;
+                //a contaDestino irá chamar o método Depositar que passará o valorTransferencia (como parametro)
+                destino.Depositar(valorTransferencia);
+
+                Console.WriteLine();
+
+                //Frase para mostrar a transferência efetuado
+                Console.WriteLine($"O {NomeTitular} " + $"efetuou o depósito de {valorTransferencia}, " + "\n" + 
+                    $"o saldo agora é de {Saldo}" + "reais");
+            }
+
+            return Saldo;
+        }
+
     }
 
 }
