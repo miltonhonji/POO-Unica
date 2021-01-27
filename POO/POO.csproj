@@ -8,8 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Encapsulamento\" />
-    <Folder Include="Herança\" />
-    <Folder Include="Polimorfismo\" />
+    <Folder Include="Model\" />
   </ItemGroup>
 
 </Project>
